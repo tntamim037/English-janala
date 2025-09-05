@@ -93,11 +93,26 @@
     </section>
 
     <section id="word_container" class="p-8 bg-[#badeff42] w-11/12 mx-auto rounded-xl grid grid-cols-3 gap-5 ">
-       <div class="text-center col-span-full space-y-3 py-4">
+        <div class="text-center col-span-full space-y-3 py-4">
         <p class="bangla text-[#79716B] text-sm font-medium">আপনি এখনো কোন Lesson Select করেন নি</p>
        <h1 class="bangla text-3xl font-medium">একটি Lesson Select করুন।</h1>
        </div>
     </section>
+    
+    <!-- You can open the modal using ID.showModal() method -->
+<!-- <button class="btn" onclick="my_modal_4.showModal()">open modal</button> -->
+<dialog id="my_modal_4" class="modal">
+  <div class="modal-box w-11/12 max-w-5xl">
+    <h3 class="text-lg font-bold">Hello!</h3>
+    <p class="py-4">Click the button below to close</p>
+    <div class="modal-action">
+      <form method="dialog">
+        <!-- if there is a button, it will close the modal -->
+        <button class="btn">Close</button>
+      </form>
+    </div>
+  </div>
+</dialog>
     <script src="./script/script.js"></script>
 </body>
 </html>

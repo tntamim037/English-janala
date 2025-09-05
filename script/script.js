@@ -3,14 +3,25 @@ const loadLesson=()=>{
     .then(res=>res.json())
     .then(json=>displayLesson(json.data))
 }
+const removeActive=()=>{
+    const lessonButton=document.querySelectorAll(".lesson-btn")
+    // console.log(lessonButton);
+    lessonButton.forEach(btn=>btn.classList.remove("active"));
 
+}
 const loadLevelWord=(id)=>{
     // console.log(id);
     const url=`https://openapi.programming-hero.com/api/level/${id}`
     // console.log(url);
     fetch(url)
     .then(resp=>resp.json())
-    .then(data=>displayLevelWord(data.data))
+    .then(data=>{
+        removeActive()
+        const clickBtn=document.getElementById(`lesson_btn_${id}`)
+        // console.log(clickBtn);
+        clickBtn.classList.add("active")
+        displayLevelWord(data.data)
+    })
 
 }
 const displayLevelWord=(words)=>{
@@ -19,7 +30,11 @@ const displayLevelWord=(words)=>{
 
     if(words.length===0){
         // alert("no word")
-         wordContainer.innerHTML=" "
+         wordContainer.innerHTML=`<div class="text-center col-span-full space-y-3 py-4">
+        <img src="./assets/alert-error.png" alt="" class="mx-auto">
+        <p class="bangla text-[#79716B] text-sm font-medium">এই Lesson এ এখনো কোনো Vocabulary যুক্ত করা হয়নি।</p>
+       <h1 class="bangla text-3xl font-medium">নেক্সট Lesson এ যান</h1>
+       </div>`
         return;
     }
 
@@ -29,9 +44,9 @@ const displayLevelWord=(words)=>{
         wordDiv.innerHTML=` <div class="bg-white rounded-xl shadow-sm text-center   py-8 px-6 space-y-4">
             <h1 class="font-bold text-2xl">${word.word}</h1>
             <p class="font-medium text-sm">Meaning /Pronounciation</p>
-            <div class="font-medium text-2xl bangla">"${word.pronunciation}-${word.meaning}"</div>
+            <div class="font-medium text-2xl bangla">"${word.pronunciation ? word.pronunciation:"শব্দ পাওয়া যায়নি"}-${word.meaning ? word.meaning:"অর্থ পাওয়া যায়নি"}"</div>
             <div class="flex justify-between items-center">
-                <button class="btn bg-[#37495733] hover:bg-[#1A91FF90]"><i class="fa-solid fa-circle-info"></i></button>
+                <button onclick="my_modal_4.showModal()" class="btn bg-[#37495733] hover:bg-[#1A91FF90]"><i class="fa-solid fa-circle-info"></i></button>
                 <button class="btn bg-[#37495733] hover:bg-[#1A91FF90]"><i class="fa-solid fa-volume-high"></i></button>
             </div>
         </div>`
@@ -49,7 +64,7 @@ for(let lesson of lessons){
 // 3.creat element
     const btnDiv=document.createElement("div")
     btnDiv.innerHTML=`
-    <button onclick="loadLevelWord(${lesson.level_no})" class="btn btn-outline btn-primary">
+    <button id="lesson_btn_${lesson.level_no}" onclick="loadLevelWord(${lesson.level_no})" class="btn btn-outline btn-primary lesson-btn">
     <i class="fa-solid fa-book-open"></i>
     Learn-${lesson.level_no}
     </button>`
