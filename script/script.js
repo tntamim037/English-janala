@@ -24,6 +24,38 @@ const loadLevelWord=(id)=>{
     })
 
 }
+const loadWordDetail=async(id)=>{
+    const url=`https://openapi.programming-hero.com/api/word/${id}`
+    // console.log(url);
+    const res=await fetch(url)
+    const details= await res.json()
+    displayWordDetails(details.data);
+
+}
+const displayWordDetails=(word)=>{
+    // console.log(word);
+    const detailsContainer=document.getElementById("details_container")
+    detailsContainer.innerHTML=` <div class="">
+        <h1 class="text-2xl font-bold bangla">${word.word} ( <i class="fa-solid fa-microphone-lines"></i>:${word.pronunciation})</h1>
+      </div>
+      <div class="space-y-2">
+        <h1 class="text-base font-semibold">Meaning</h1>
+        <p class="bangla text-base font-medium">${word.meaning}</p>
+      </div>
+      <div class="space-y-2">
+        <h1 class="text-base font-semibold">Example</h1>
+        <p class="text-base text-gray-500">${word.sentence}</p>
+      </div>
+      <div class="space-y-2">
+        <h1 class="text-base font-semibold bangla">সমার্থক শব্দ গুলো</h1>
+       <span class="btn text-gray-700"></span>
+       <span class="btn text-gray-700">Enthusiastic</span>
+       <span class="btn text-gray-700">Enthusiastic</span>
+      </div>`
+    document.getElementById("my_modal_4").showModal();
+
+}
+
 const displayLevelWord=(words)=>{
     const wordContainer=document.getElementById("word_container")
     wordContainer.innerHTML=" ";
@@ -46,7 +78,7 @@ const displayLevelWord=(words)=>{
             <p class="font-medium text-sm">Meaning /Pronounciation</p>
             <div class="font-medium text-2xl bangla">"${word.pronunciation ? word.pronunciation:"শব্দ পাওয়া যায়নি"}-${word.meaning ? word.meaning:"অর্থ পাওয়া যায়নি"}"</div>
             <div class="flex justify-between items-center">
-                <button onclick="my_modal_4.showModal()" class="btn bg-[#37495733] hover:bg-[#1A91FF90]"><i class="fa-solid fa-circle-info"></i></button>
+                <button onclick="loadWordDetail(${word.id})" class="btn bg-[#37495733] hover:bg-[#1A91FF90]"><i class="fa-solid fa-circle-info"></i></button>
                 <button class="btn bg-[#37495733] hover:bg-[#1A91FF90]"><i class="fa-solid fa-volume-high"></i></button>
             </div>
         </div>`
