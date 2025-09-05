@@ -1,3 +1,23 @@
+const showAlert=()=>{
+//     alert(`😂 হা হা!! নিচের দিকে যাও ⬇️
+// 📚 Click on any lesson ✨`)
+const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value.trim();
+
+    if (!email || !password) {
+        alert("দয়া করে ইমেইল ও পাসওয়ার্ড দুইটাই প্রদান করুন।");
+        return false;
+    }
+
+    if (password.length < 8) {
+        alert("পাসওয়ার্ড কমপক্ষে ৮ অক্ষরের হতে হবে।");
+        return false;
+    }
+
+     alert(`😂 হা হা!! নিচের দিকে যাও ⬇️
+📚 Click on any lesson ✨`)
+}
+
 const loadLesson=()=>{
     fetch("https://openapi.programming-hero.com/api/levels/all")
     .then(res=>res.json())
@@ -99,7 +119,7 @@ for(let lesson of lessons){
     btnDiv.innerHTML=`
     <button id="lesson_btn_${lesson.level_no}" onclick="loadLevelWord(${lesson.level_no})" class="btn btn-outline btn-primary lesson-btn">
     <i class="fa-solid fa-book-open"></i>
-    Learn-${lesson.level_no}
+    lesson-${lesson.level_no}
     </button>`
 // 4.apppend
 lavelContainer.append(btnDiv)
