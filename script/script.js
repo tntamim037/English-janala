@@ -46,12 +46,13 @@ const displayWordDetails=(word)=>{
         <h1 class="text-base font-semibold">Example</h1>
         <p class="text-base text-gray-500">${word.sentence}</p>
       </div>
-      <div class="space-y-2">
+      `
+    /* <div class="space-y-2">
         <h1 class="text-base font-semibold bangla">সমার্থক শব্দ গুলো</h1>
        <span class="btn text-gray-700"></span>
        <span class="btn text-gray-700">Enthusiastic</span>
        <span class="btn text-gray-700">Enthusiastic</span>
-      </div>`
+      </div>*/
     document.getElementById("my_modal_4").showModal();
 
 }
